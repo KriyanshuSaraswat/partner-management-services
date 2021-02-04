@@ -129,7 +129,7 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		}
 		
 		RegFTPChipDetail chipDetail = new RegFTPChipDetail();
-		chipDetail.setCrBy(authN.getName());
+		//chipDetail.setCrBy(authN.getName());
 		chipDetail.setActive(false);
 		chipDetail.setCrDtimes(LocalDateTime.now());
 		chipDetail.setFtpProviderId(chipDetails.getFtpProviderId());
@@ -210,12 +210,12 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 			entity.setId(partnerFromDb.getId());
 			entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setActive(true);
-			entity.setCrBy(authN.getName());
+			//entity.setCrBy(authN.getName());
 		}else {
 			entity = ftpProvider.get();
 			entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setUpdDtimes(LocalDateTime.now());
-			entity.setUpdBy(authN.getName());
+			//entity.setUpdBy(authN.getName());
 		}
 		foundationalTrustProviderRepository.save(entity);		
 		RegFTPChipDetail updateObject = chipDetail.get();		

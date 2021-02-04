@@ -125,7 +125,7 @@ public class FTPChipDetailServiceImpl implements FtpChipDetailService {
 		}
 		
 		FTPChipDetail chipDetail = new FTPChipDetail();
-		chipDetail.setCrBy(authN.getName());
+	//	chipDetail.setCrBy(authN.getName());
 		chipDetail.setActive(false);
 		chipDetail.setCrDtimes(LocalDateTime.now());
 		chipDetail.setFtpProviderId(chipDetails.getFtpProviderId());
@@ -205,12 +205,12 @@ public class FTPChipDetailServiceImpl implements FtpChipDetailService {
 			entity.setId(partnerFromDb.getId());
 			//entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setActive(true);
-			entity.setCrBy(authN.getName());
+			//entity.setCrBy(authN.getName());
 		}else {
 			entity = ftpProvider.get();
 			//entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setUpdDtimes(LocalDateTime.now());
-			entity.setUpdBy(authN.getName());
+			//entity.setUpdBy(authN.getName());
 		}
 		foundationalTrustProviderRepository.save(entity);
 		FTPChipDetail updateObject = chipDetail.get();		

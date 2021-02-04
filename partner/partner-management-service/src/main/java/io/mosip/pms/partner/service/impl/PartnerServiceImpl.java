@@ -365,6 +365,7 @@ public class PartnerServiceImpl implements PartnerService {
 		Partner partner = getValidPartner(partnerId);
 		partner.setAddress(partnerUpdateRequest.getAddress());
 		partner.setContactNo(partnerUpdateRequest.getContactNumber());
+		partner.setApprovalStatus("Approved");
 		partner.setUpdBy(getUser());
 		partner.setUpdDtimes(Timestamp.valueOf(LocalDateTime.now()));
 		partnerRepository.save(partner);
@@ -444,7 +445,7 @@ public class PartnerServiceImpl implements PartnerService {
 					ErrorCode.POLICY_EXPIRED_EXCEPTION.getErrorMessage());
 			
 		}
-		if(authPolicyFromDb.getPolicyGroup().getIsActive()) {
+		if(!authPolicyFromDb.getPolicyGroup().getIsActive()) {
 			LOGGER.info("Policy group is not active." + authPolicyFromDb.getPolicyGroup().getId());
 			throw new PartnerServiceException(
 					ErrorCode.POLICY_GROUP_NOT_ACTIVE.getErrorCode(),
@@ -792,8 +793,6 @@ public class PartnerServiceImpl implements PartnerService {
 			throw new PartnerServiceException(ErrorCode.CREDENTIAL_TYPE_NOT_ALLOWED.getErrorCode(),
 					ErrorCode.CREDENTIAL_TYPE_NOT_ALLOWED.getErrorMessage() + allowedCredentialTypes);
 		}
-
-		
 	}
 
 	@Override

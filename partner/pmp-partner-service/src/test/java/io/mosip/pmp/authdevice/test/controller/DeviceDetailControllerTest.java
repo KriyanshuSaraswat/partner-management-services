@@ -44,7 +44,7 @@ import io.mosip.pmp.regdevice.service.RegDeviceDetailService;
 @SpringBootTest(classes = PartnerserviceApplicationTest.class)
 @AutoConfigureMockMvc
 @EnableWebMvc
-@Ignore
+
 public class DeviceDetailControllerTest {
 	
 	@Autowired

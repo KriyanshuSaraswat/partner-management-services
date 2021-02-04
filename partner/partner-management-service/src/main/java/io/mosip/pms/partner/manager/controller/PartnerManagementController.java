@@ -49,7 +49,7 @@ import io.mosip.pms.partner.manager.service.PartnerManagerService;
  */
 
 @RestController
-//@RequestMapping(value = "/pmpartners")
+@RequestMapping(value = "/pmpartners")
 public class PartnerManagementController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PartnerManagementController.class);
