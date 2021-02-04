@@ -44,7 +44,6 @@ import io.mosip.pms.common.helper.SearchHelper;
 import io.mosip.pms.common.response.dto.ValidateResponseWrapper;
 import io.mosip.pms.common.util.PageUtils;
 import io.mosip.pms.common.util.RestUtil;
-import io.mosip.pms.common.validator.FilterColumnValidator;
 import io.mosip.pms.device.authdevice.entity.DeviceDetail;
 import io.mosip.pms.device.authdevice.entity.FoundationalTrustProvider;
 import io.mosip.pms.device.authdevice.entity.RegisteredDevice;
@@ -67,7 +66,6 @@ import io.mosip.pms.device.request.dto.RegisteredDevicePostDto;
 import io.mosip.pms.device.response.dto.DeviceDeRegisterResponse;
 import io.mosip.pms.device.response.dto.RegisterDeviceResponse;
 import io.mosip.pms.partner.test.PartnerServiceApplicationTest;
-import io.mosip.pms.service.PartnerManagementService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { PartnerServiceApplicationTest.class })

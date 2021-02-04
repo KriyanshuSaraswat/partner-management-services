@@ -49,7 +49,6 @@ import io.mosip.pms.device.request.dto.SecureBiometricInterfaceStatusUpdateDto;
 import io.mosip.pms.device.request.dto.SecureBiometricInterfaceUpdateDto;
 import io.mosip.pms.device.util.AuditUtil;
 import io.mosip.pms.partner.test.PartnerServiceApplicationTest;
-import io.mosip.pms.service.PartnerManagementService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { PartnerServiceApplicationTest.class })

@@ -365,7 +365,6 @@ public class PartnerServiceImpl implements PartnerService {
 		Partner partner = getValidPartner(partnerId);
 		partner.setAddress(partnerUpdateRequest.getAddress());
 		partner.setContactNo(partnerUpdateRequest.getContactNumber());
-		partner.setApprovalStatus("Approved");
 		partner.setUpdBy(getUser());
 		partner.setUpdDtimes(Timestamp.valueOf(LocalDateTime.now()));
 		partnerRepository.save(partner);

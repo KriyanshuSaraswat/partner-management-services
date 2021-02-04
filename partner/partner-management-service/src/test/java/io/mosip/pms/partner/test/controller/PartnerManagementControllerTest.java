@@ -109,7 +109,7 @@ public class PartnerManagementControllerTest {
 		Mockito.when(partnerManagementService.updatePolicyAgainstApikey(partnersPolicyMappingRequest,partnerID,
 				partnerAPIKey)).thenReturn(partnersPolicyMappingResponse);
 
-		mockMvc.perform(put("/pmpartners/partnerId/67899/partnerApiKey/45678").contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(put("/partnerId/67899/partnerApiKey/45678").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(request))).andExpect(status().isOk());
 	}
 	
@@ -131,7 +131,7 @@ public class PartnerManagementControllerTest {
 		request.setRequesttime(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
 		request.setMetadata("{}");
 
-		mockMvc.perform(MockMvcRequestBuilders.patch("/pmpartners/partnerId/12345").contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(MockMvcRequestBuilders.patch("/partnerId/12345").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(request))).andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -153,7 +153,7 @@ public class PartnerManagementControllerTest {
 		request.setRequesttime(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
 		request.setMetadata("{}");
 
-		mockMvc.perform(MockMvcRequestBuilders.patch("/pmpartners/partnerId/67899/partnerApiKey/45678").contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(MockMvcRequestBuilders.patch("/partnerId/67899/partnerApiKey/45678").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(request))).andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -174,7 +174,7 @@ public class PartnerManagementControllerTest {
 		request.setRequesttime(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
 		request.setMetadata("{}");
 
-		mockMvc.perform(MockMvcRequestBuilders.patch("/pmpartners/PartnerAPIKeyRequests/APIKeyReqID")
+		mockMvc.perform(MockMvcRequestBuilders.patch("/PartnerAPIKeyRequests/APIKeyReqID")
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(objectMapper.writeValueAsString(request)))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -185,19 +185,8 @@ public class PartnerManagementControllerTest {
 		RetrievePartnerDetailsResponse retrievePartnerDetailsResponse = new RetrievePartnerDetailsResponse();
 		Mockito.when(partnerManagementService.getAllAuthEKYCPartnersForThePolicyGroup(Optional.empty()))
 				.thenReturn(retrievePartnerDetailsResponse);
-		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/getPartners")).andExpect(MockMvcResultMatchers.status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/getPartners")).andExpect(MockMvcResultMatchers.status().isOk());
 	}
-
-//	@Test
-//	@WithMockUser(roles = {"PARTNERMANAGER"})
-//	public void getparticularAuthEKYCPartnerDetailsForGivenPartnerIdTest() throws Exception {
-//		String partnerID = "67899";
-//		RetrievePartnersDetails retrievePartnersDetails = new RetrievePartnersDetails();
-//		Mockito.when(partnerManagementService.getparticularAuthEKYCPartnerDetailsForGivenPartnerId(partnerID))
-//				.thenReturn(retrievePartnersDetails);
-//		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/partnerID"))
-//				.andExpect(MockMvcResultMatchers.status().isOk());
-//	}
 
 	@Test
 	@WithMockUser(roles = {"PARTNERMANAGER"})
@@ -207,7 +196,7 @@ public class PartnerManagementControllerTest {
 		PartnerAPIKeyToPolicyMappingsResponse partnerAPIKeyToPolicyMappingsResponse = new PartnerAPIKeyToPolicyMappingsResponse();
 		Mockito.when(partnerManagementService.getPartnerAPIKeyToPolicyMapping(partnerID, PartnerAPIKey))
 				.thenReturn(partnerAPIKeyToPolicyMappingsResponse);
-		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/partnerId/67899/partnerApiKey/56789"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/partnerId/67899/partnerApiKey/56789"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -217,7 +206,7 @@ public class PartnerManagementControllerTest {
 		List<ApikeyRequests> apikeyRequests = new ArrayList<ApikeyRequests>();
 		Mockito.when(partnerManagementService.getAllPartnerAPIKeyRequestsAsReceivedByPartnerManagers())
 				.thenReturn(apikeyRequests);
-		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/PartnerAPIKeyRequests"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/PartnerAPIKeyRequests"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -228,7 +217,7 @@ public class PartnerManagementControllerTest {
 		ApikeyRequests apikeyRequests = new ApikeyRequests();
 		Mockito.when(partnerManagementService.getTheRequestForPartnerAPIKeyToPolicyMappingsForGivenRequestId(APIKeyReqID))
 				.thenReturn(apikeyRequests);
-		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/PartnerAPIKeyRequests/APIKeyReqID"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/PartnerAPIKeyRequests/APIKeyReqID"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -237,7 +226,7 @@ public class PartnerManagementControllerTest {
 	public void validateAndGetPartnerPolicyFile() throws Exception {
 		PartnerPolicyResponse res = new PartnerPolicyResponse();
 		Mockito.when(partnerManagementService.getPartnerMappedPolicyFile("1234","asdsa","adfdsasd",false)).thenReturn(res);
-		mockMvc.perform(MockMvcRequestBuilders.get("/pmpartners/validatePartnerMisp/partnerId/12345/partnerApiKey/adsaASD/mispLicenseKey/QWETREWWEFG"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/validatePartnerMisp/partnerId/12345/partnerApiKey/adsaASD/mispLicenseKey/QWETREWWEFG"))
 		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 }

@@ -118,8 +118,10 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		RegFoundationalTrustProvider entity = new RegFoundationalTrustProvider();
 		entity.setActive(true);
 		Authentication authN = SecurityContextHolder.getContext().getAuthentication();
+		RegFTPChipDetail chipDetail = new RegFTPChipDetail();
 		if (!EmptyCheckUtils.isNullEmpty(authN)) {
 			entity.setCrBy(authN.getName());
+			chipDetail.setCrBy(authN.getName());
 		}
 		entity.setCrDtimes(LocalDateTime.now());
 		entity.setId(partnerFromDb.getId());
@@ -127,9 +129,6 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		if(ftpProvider == null) {
 			foundationalTrustProviderRepository.save(entity);
 		}
-		
-		RegFTPChipDetail chipDetail = new RegFTPChipDetail();
-		//chipDetail.setCrBy(authN.getName());
 		chipDetail.setActive(false);
 		chipDetail.setCrDtimes(LocalDateTime.now());
 		chipDetail.setFtpProviderId(chipDetails.getFtpProviderId());
@@ -204,6 +203,10 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		Optional<RegFoundationalTrustProvider> ftpProvider = foundationalTrustProviderRepository.findById(partnerFromDb.getId());
 		RegFoundationalTrustProvider entity = null;
 		Authentication authN = SecurityContextHolder.getContext().getAuthentication();		
+		if (!EmptyCheckUtils.isNullEmpty(authN)) {
+			entity.setCrBy(authN.getName());
+			entity.setUpdBy(authN.getName());
+		}
 		if(ftpProvider.isEmpty()) {
 			entity = new RegFoundationalTrustProvider();
 			entity.setCrDtimes(LocalDateTime.now());

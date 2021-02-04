@@ -13,21 +13,13 @@
 	<name>partner-management-service</name>
 	
 	<dependencies>
-	<dependency>
-			<groupId>org.apache.directory.api</groupId>
-			<artifactId>api-all</artifactId>
-			<version>2.0.0.AM2</version>
-		</dependency>
+	
 		<dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
     <version>5.3.3</version>
 </dependency>
-<dependency>
-    <groupId>org.keycloak</groupId>
-    <artifactId>keycloak-core</artifactId>
-    <version>12.0.2</version>
-</dependency>
+
 	<dependency>
 			<groupId>io.mosip.kernel</groupId>
 			<artifactId>kernel-dataaccess-hibernate</artifactId>
@@ -101,13 +93,13 @@
 			    </exclusion>
 			 </exclusions>
 		</dependency>
-
-		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <version>1.4.200</version>
-		    <scope>test</scope>
-		</dependency>
+		
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>1.4.200</version>
+    <scope>test</scope>
+</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

@@ -88,21 +88,6 @@ public class InfraProviderServiceImplTest {
 		infraProviderServiceImpl.approveInfraProvider(misp_Id);	
 		}
 	
-//	@Test(expected  = MISPServiceException.class)
-//	public void approveInfraProvider_03 () {
-//		String misp_Id = "1234";
-//		Partner partner = new Partner();
-//		partner.setId(misp_Id);
-//		partner.setIsActive(true);
-//		MISPLicenseEntity mispLicenseEntity = new MISPLicenseEntity();
-//		mispLicenseEntity.setIsActive(true);
-//		Optional<Partner> opt_partner = Optional.of(partner);
-//		Optional<MISPLicenseEntity> opt_MispEntity = Optional.of(mispLicenseEntity);
-//		Mockito.when(mispLicenseRepository.findByMispId(misp_Id)).thenReturn(mispLicenseEntity);
-//		Mockito.when(partnerRepository.findById(misp_Id)).thenReturn(opt_partner);
-//		infraProviderServiceImpl.approveInfraProvider(misp_Id);	
-//		}
-	
 	@Test
 	public void updateInfraProviderTest() {
 		String id = "123"; 

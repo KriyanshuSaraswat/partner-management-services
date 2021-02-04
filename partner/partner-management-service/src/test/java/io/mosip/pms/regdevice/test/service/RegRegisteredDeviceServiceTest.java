@@ -9,13 +9,11 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.keycloak.representations.AccessTokenResponse;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -24,16 +22,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,7 +38,6 @@ import io.mosip.pms.common.dto.Pagination;
 import io.mosip.pms.common.dto.SearchFilter;
 import io.mosip.pms.common.dto.SearchSort;
 import io.mosip.pms.common.helper.SearchHelper;
-import io.mosip.pms.common.response.dto.ResponseWrapper;
 import io.mosip.pms.common.util.PageUtils;
 import io.mosip.pms.device.authdevice.entity.DeviceDetail;
 import io.mosip.pms.device.dto.DeRegisterDeviceReqDto;
@@ -116,13 +108,11 @@ public class RegRegisteredDeviceServiceTest {
 	private DeviceData device;
 	private RegRegisteredDeviceHistory registeredDeviceHistory;
 	private DeviceInfo deviceInfo;
-	//private ResponseWrapper<SignResponseDto> responseWrapper ;
-	//private SignResponseDto signResponseDto;
 	DeviceSearchDto deviceSearchDto = new DeviceSearchDto();
 	Pagination pagination = new Pagination();
 	SearchSort searchSort = new SearchSort();
 	SearchFilter searchFilter = new SearchFilter();
-	@SuppressWarnings("unchecked")
+	
 	@Before
 	public void setup() throws Exception {
 		registeredDevice = new RegRegisteredDevice();
@@ -179,26 +169,6 @@ public class RegRegisteredDeviceServiceTest {
 			when(registeredDeviceRepository.save(Mockito.any())).thenReturn(registeredDevice);
 			when(registeredDeviceHistoryRepo.save(Mockito.any())).thenReturn(registeredDeviceHistory);
 			when(registeredDeviceRepository.findByCodeAndIsActiveIsTrue(Mockito.anyString())).thenReturn(registeredDevice);
-//			 signResponseDto = new SignResponseDto();
-//			signResponseDto.setTimestamp(LocalDateTime.now());
-//			signResponseDto.setSignature(
-//					".TGlqZ0lPaUU0MTVHTHEwekxlSkZMb2I4MktTeHdnazc0YkgzZUdwTE9tdm4xVFNYUS8rZHFuemZoM2x2cjZhOVRHb1ZzYjFIeEJqRFdpOStWNlV5THBJVm82VlVwVnppaCtVRno4c0xDSjJsUWJWajhKdm5ybDdPWlpTQWZwVHZnYkxsZ3pNV3FDR0JrVzdITnFTRHVVZFRPblE3azc5RHlQam5sSjlHQkdFaWpMRERUSVNDKzUyT2JpdjdZemUxWVBjbkl4MGNtYVI4bWF2bmYvN09qdmk5VFZQQlppYkx3eVlFZDgvQnJ4OVpReWlXUmJ5bVNIUGo2L1dqVFBsSnJQZGdXTEVONVhrdWFLQldWN1BrR1R2d3Fydit4RjRtc3FvdElGTGs0cnZ3R0JYTTJ3K2pCeUhNT3c1SmpTMXUxNFh1ejhTK3N0eTMrNGNXcVZ0bVZRPT0=");
-//
-//			 responseWrapper = new ResponseWrapper<>();
-//			responseWrapper.setResponse(signResponseDto);
-//			responseWrapper.setResponsetime(LocalDateTime.now());
-//			String response = mapper.writeValueAsString(responseWrapper);
-		//	when(restTemplate.exchange(Mockito.anyString(), Mockito.any(HttpMethod.class), Mockito.any(HttpEntity.class),
-					//Mockito.any(Class.class))).thenReturn(new ResponseEntity<String>(response, HttpStatus.OK));
-//			Properties prop=new Properties();
-//			prop.setProperty("token", "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJScUZSaS1ZcmVzbDBfR2lINDdMZ2Q1ckQ0azhRbXBObXZvTFZCM3hYMWZFIn0.eyJqdGkiOiJhYmVmZmI0Mi03OWZkLTQ3OGMtOTA0Zi1jMWU0NmVlYmRiZTEiLCJleHAiOjE1OTkwNjY2MzAsIm5iZiI6MCwiaWF0IjoxNTk5MDMwNjMwLCJpc3MiOiJodHRwczovL2Rldi5tb3NpcC5uZXQva2V5Y2xvYWsvYXV0aC9yZWFsbXMvbW9zaXAiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNDlkN2JiZTUtYTFjNC00NTYxLWE0YmYtMjY0NWIxNDBmZmRkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibW9zaXAtcmVncHJvYy1jbGllbnQiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJlNzU1MTk4Yi0wY2IzLTQwYzgtODllYi0xMTM2MDA1NzQxYzMiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJFR0lTVFJBVElPTl9QUk9DRVNTT1IiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsibW9zaXAtcmVncHJvYy1jbGllbnQiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImNsaWVudElkIjoibW9zaXAtcmVncHJvYy1jbGllbnQiLCJjbGllbnRIb3N0IjoiMTAuMjQ0LjkuOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LW1vc2lwLXJlZ3Byb2MtY2xpZW50IiwiY2xpZW50QWRkcmVzcyI6IjEwLjI0NC45LjgifQ.dpZv9EtF_QRm23q14wwRHeEoNGmvwAdY85eTAkKEmLlOvd1yQ7WTZsPGEPsiWn9ii8IqgqJWH_DuyEDPPjoKE2KBf_5csuvkzkSci3xuMG9KrivTsLufXhveDPzsiMDCoJHqvDxnE91Sb-RNQVCdG78AE7mwQuQBdLfz-Q8V_8uQWtW7lruEu4NUTjcpi7zukuxjTwQnJswzwSOv8zxR80jKSdoHdAr1g8t_oC7nrsJ2mfhZiG-kncA1V9F1FonrwUdeoWimpdHBOHqPlMQrBw9di2ZhD_Y0OqI5u1jbiTW1ecnrUtEKLllX2CEfiv333T3WWUftk5QKGDYjEN1LWw ");
-//		System.setProperties(prop);
-		//AccessTokenResponse tok=new AccessTokenResponse();
-		//tok.setAccess_token("eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJScUZSaS1ZcmVzbDBfR2lINDdMZ2Q1ckQ0azhRbXBObXZvTFZCM3hYMWZFIn0");
-		//ResponseEntity<AccessTokenResponse> responsetoken=new ResponseEntity<>(tok,HttpStatus.OK);
-		//when(restTemplate.postForEntity(
-			//	Mockito.anyString(), Mockito.any(HttpEntity.class), Mockito.any(Class.class))).thenReturn(responsetoken);
-		
 		ReflectionTestUtils.setField(registeredDeviceService,"registerDeviceTimeStamp","+5");
 		ReflectionTestUtils.setField(registeredDeviceService,"activeProfile","mz");
 		ReflectionTestUtils.setField(registeredDeviceService,"signUrl","https://dev.mosip.net/v1/keymanager/sign");
@@ -273,14 +243,8 @@ public class RegRegisteredDeviceServiceTest {
 		registerDeviceResponse.setTimeStamp(LocalDateTime.now(ZoneOffset.UTC));
 		registerDeviceResponse.setEnv("mz");
 		registerDeviceResponse.setDigitalId(mapper.writeValueAsString(dig));
-//		HeaderRequest header = new HeaderRequest();
-//		header.setAlg("RS256");
-//		header.setType("JWS");
-//		String headerString = mapper.writeValueAsString(header);
 		Mockito.when(objectMapper.writeValueAsBytes(any())).thenReturn(mapper.writeValueAsBytes(registerDeviceResponse));
 		Mockito.when(objectMapper.readValue(any(byte[].class), any(Class.class))).thenReturn(device).thenReturn(dig);
-		//Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn(mapper.writeValueAsString(dig)).thenReturn(mapper.writeValueAsString(signResponseDto)).thenReturn(headerString).thenReturn(mapper.writeValueAsString(registerDeviceResponse));
-		//Mockito.when(objectMapper.readValue(Mockito.anyString(), any(Class.class))).thenReturn(dig).thenReturn(responseWrapper).thenReturn(signResponseDto);
 		registeredDeviceService.signedRegisteredDevice(registeredDevicePostDto);
 		
 	}

@@ -1,8 +1,6 @@
 package io.mosip.pms.regdevice.test.service;
 
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import io.mosip.kernel.core.exception.ServiceError;
-import io.mosip.kernel.core.util.StringUtils;
 import io.mosip.pms.common.entity.Partner;
 import io.mosip.pms.common.repository.PartnerServiceRepository;
 import io.mosip.pms.device.exception.DeviceValidationException;
@@ -47,10 +43,7 @@ public class DeviceValidationServiceImplTest {
 
 	@InjectMocks
 	private DeviceValidationService deviceValidationService = new DeviceValidationServiceImpl();
-	
-//	@Mock
-//	private StringUtils string;
-	
+
 	@Mock
 	private RegRegisteredDeviceRepository registeredDeviceRepository;
 	
@@ -744,7 +737,6 @@ public class DeviceValidationServiceImplTest {
 		deviceProvider.setId("1234");
 		Mockito.when(registeredDeviceRepository.findByCodeAndPurposeIgnoreCaseAndIsActiveIsTrue(Mockito.anyString(), Mockito.anyString())).thenReturn(regRegisteredDevice);
 		Mockito.when(deviceProviderRepository.findByIdAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceProvider);
-		//Mockito.when(deviceServiceRepository.findBySwVersionAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceServices);
 		Mockito.when(deviceDetailRepository.findByIdAndIsDeletedFalseOrIsDeletedIsNull(Mockito.anyString())).thenReturn(regDeviceDetail);
 		deviceValidationService.validateDeviceProviders(validateDeviceDto);
 	}
@@ -782,7 +774,6 @@ public class DeviceValidationServiceImplTest {
 		deviceServices.add(deviceobject);
 		deviceProvider.setId("1234");
 		Mockito.when(registeredDeviceRepository.findByCodeAndPurposeIgnoreCaseAndIsActiveIsTrue(Mockito.anyString(), Mockito.anyString())).thenReturn(regRegisteredDevice);
-		//Mockito.when(deviceProviderRepository.findByIdAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceProvider);
 		Mockito.when(deviceServiceRepository.findBySwVersionAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceServices);
 		Mockito.when(deviceDetailRepository.findByIdAndIsDeletedFalseOrIsDeletedIsNull(Mockito.anyString())).thenReturn(regDeviceDetail);
 		deviceValidationService.validateDeviceProviders(validateDeviceDto);
@@ -820,7 +811,6 @@ public class DeviceValidationServiceImplTest {
 		regDeviceDetail.setModel("model");
 		deviceServices.add(deviceobject);
 		deviceProvider.setId("1234");
-		//Mockito.when(registeredDeviceRepository.findByCodeAndPurposeIgnoreCaseAndIsActiveIsTrue(Mockito.anyString(), Mockito.anyString())).thenReturn(regRegisteredDevice);
 		Mockito.when(deviceProviderRepository.findByIdAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceProvider);
 		Mockito.when(deviceServiceRepository.findBySwVersionAndIsActiveIsTrue(Mockito.anyString())).thenReturn(deviceServices);
 		Mockito.when(deviceDetailRepository.findByIdAndIsDeletedFalseOrIsDeletedIsNull(Mockito.anyString())).thenReturn(regDeviceDetail);

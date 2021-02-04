@@ -24,7 +24,6 @@ import io.mosip.pms.common.entity.AuthPolicy;
 import io.mosip.pms.common.entity.MISPEntity;
 import io.mosip.pms.common.entity.MISPLicenseEntity;
 import io.mosip.pms.common.entity.MISPLicenseKey;
-import io.mosip.pms.common.entity.MISPlKeyUniqueKeyEntity;
 import io.mosip.pms.common.entity.Partner;
 import io.mosip.pms.common.entity.PartnerPolicy;
 import io.mosip.pms.common.entity.PartnerPolicyRequest;
@@ -552,32 +551,6 @@ public class PartnerManagementServiceImplTest {
 		partnerManagementImpl.getAllAuthEKYCPartnersForThePolicyGroup(Optional.empty());
 	}
 	
-	
-//	@Test
-//	public void getparticularAuthEKYCPartnerDetailsForGivenPartnerIdTest_S1() {
-//		String partnerId = "12345";
-//		Optional<Partner> partner = Optional.of(getPartner());
-//		Mockito.when(partnerRepository.findById(partnerId)).thenReturn(partner);
-//		partnerManagementImpl.getparticularAuthEKYCPartnerDetailsForGivenPartnerId(partnerId);
-//	}
-//	
-//	@Test(expected = PartnerManagerServiceException.class)
-//	public void getparticularAuthEKYCPartnerDetailsForGivenPartnerIdTest_S2() {
-//		String partnerId = "89765";		
-//		Mockito.when(partnerRepository.findById(partnerId)).thenReturn(Optional.empty());
-//		partnerManagementImpl.getparticularAuthEKYCPartnerDetailsForGivenPartnerId(partnerId);
-//	}
-//	
-//	@Test
-//	public void getparticularAuthEKYCPartnerDetailsForGivenPartnerIdTest_S3() {
-//		String partnerId = "12345";
-//		Partner partn = getPartner();
-//		partn.setIsActive(false);
-//		Optional<Partner> partner = Optional.of(partn);	
-//		Mockito.when(partnerRepository.findById(partnerId)).thenReturn(partner);
-//		partnerManagementImpl.getparticularAuthEKYCPartnerDetailsForGivenPartnerId(partnerId);
-//	}
-	
 	@Test(expected = PartnerManagerServiceException.class)
 	public void getPartnerAPIKeyToPolicyMappingTest_S1() {
 		String partnerId = "123456";
@@ -1088,7 +1061,6 @@ public class PartnerManagementServiceImplTest {
 		PartnerPolicy policy = partnerPolicy.get();
 		policy.setIsActive(true);
 		policy.setPolicyApiKey(apiKey);
-		//policy.setPartner(partner);
 		policy.setValidToDatetime(Timestamp.valueOf(LocalDateTime.now().plusDays(10)));
 		AuthPolicy authPolicy = getAuthPolicies().get(0);
 		authPolicy.setIsActive(true);
@@ -1238,7 +1210,6 @@ public class PartnerManagementServiceImplTest {
 		AuthPolicy authPolicy = getAuthPolicies().get(0);
 		authPolicy.setIsActive(true);
 		authPolicy.setPolicyGroup(null);
-		//authPolicy.getPolicyGroup().setIsActive(false);
 		authPolicy.setValidToDate(LocalDateTime.now().plusDays(10));
 		Optional<Partner> opt_partner = Optional.of(partner);
 		Optional<MISPEntity> misp = Optional.of(misp(true));
@@ -1332,7 +1303,6 @@ public class PartnerManagementServiceImplTest {
 		Optional<MISPEntity> misp = Optional.of(misp(true));
 		Mockito.when(misplKeyRepository.findByLicensekey(license.getMispLicenseUniqueKey().getLicense_key())).thenReturn(license);
 		Mockito.when(partnerPolicyRepository.findByApiKey(apiKey)).thenReturn(policy);
-		//Mockito.when(partnerPolicyRepository.findByPartnerIdAndApikey(Mockito.anyString(), Mockito.anyString())).thenReturn(policy);
 		Mockito.when(partnerRepository.findById(partnerid)).thenReturn(opt_partner);
 		Mockito.when(authPolicyRepository.findById(policy.getPolicyId())).thenReturn(Optional.of(authPolicy));
 		Mockito.when(mispRepository.findById(Mockito.any())).thenReturn(misp);
@@ -1482,7 +1452,6 @@ public class PartnerManagementServiceImplTest {
 		AuthPolicy authPolicy = getAuthPolicies().get(0);
 		authPolicy.setIsActive(true);
 		authPolicy.setPolicyGroup(null);
-		//authPolicy.getPolicyGroup().setIsActive(true);
 		authPolicy.setValidToDate(LocalDateTime.now().plusDays(10));
 		Optional<Partner> opt_partner = Optional.of(partner);
 		Optional<MISPEntity> misp = Optional.of(misp(true));
