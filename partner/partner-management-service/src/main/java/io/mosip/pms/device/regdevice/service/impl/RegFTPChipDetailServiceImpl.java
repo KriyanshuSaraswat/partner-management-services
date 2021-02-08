@@ -119,16 +119,18 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		entity.setActive(true);
 		Authentication authN = SecurityContextHolder.getContext().getAuthentication();
 		RegFTPChipDetail chipDetail = new RegFTPChipDetail();
+		String crdBy = null;
 		if (!EmptyCheckUtils.isNullEmpty(authN)) {
-			entity.setCrBy(authN.getName());
-			chipDetail.setCrBy(authN.getName());
+			crdBy = authN.getName();
 		}
+		entity.setCrBy(crdBy);
 		entity.setCrDtimes(LocalDateTime.now());
 		entity.setId(partnerFromDb.getId());
 		entity.setPartnerOrganizationName(partnerFromDb.getName());
 		if(ftpProvider == null) {
 			foundationalTrustProviderRepository.save(entity);
 		}
+		chipDetail.setCrBy(crdBy);
 		chipDetail.setActive(false);
 		chipDetail.setCrDtimes(LocalDateTime.now());
 		chipDetail.setFtpProviderId(chipDetails.getFtpProviderId());
@@ -203,9 +205,11 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 		Optional<RegFoundationalTrustProvider> ftpProvider = foundationalTrustProviderRepository.findById(partnerFromDb.getId());
 		RegFoundationalTrustProvider entity = null;
 		Authentication authN = SecurityContextHolder.getContext().getAuthentication();		
+		String crdBy = null;
+		String updBy = null;
 		if (!EmptyCheckUtils.isNullEmpty(authN)) {
-			entity.setCrBy(authN.getName());
-			entity.setUpdBy(authN.getName());
+			crdBy =authN.getName();
+			updBy=authN.getName();
 		}
 		if(ftpProvider.isEmpty()) {
 			entity = new RegFoundationalTrustProvider();
@@ -213,12 +217,12 @@ public class RegFTPChipDetailServiceImpl implements RegFTPChipDetailService {
 			entity.setId(partnerFromDb.getId());
 			entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setActive(true);
-			//entity.setCrBy(authN.getName());
+			entity.setCrBy(crdBy);
 		}else {
 			entity = ftpProvider.get();
 			entity.setPartnerOrganizationName(partnerFromDb.getName());
 			entity.setUpdDtimes(LocalDateTime.now());
-			//entity.setUpdBy(authN.getName());
+			entity.setUpdBy(updBy);
 		}
 		foundationalTrustProviderRepository.save(entity);		
 		RegFTPChipDetail updateObject = chipDetail.get();		

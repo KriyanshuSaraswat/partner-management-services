@@ -1,12 +1,9 @@
 package io.mosip.pms.authdevice.test.service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -20,14 +17,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.mosip.kernel.core.http.RequestWrapper;
@@ -87,7 +80,6 @@ public class FTPChipDetailServiceTest {
 	
 	@Mock
 	private AuditUtil audit;
-	
 	
 	private RequestWrapper<DeviceDetailSearchDto> deviceRequestDto;
 	Partner partner=new Partner();
@@ -238,24 +230,6 @@ public class FTPChipDetailServiceTest {
 		ftpChipDetail.setFtpChipDetailId("12345");
 		ftpChipDetailService.updateFtpChipDetailStatus(request);
 	}
-	
-	@Test
-	public void uploadPartnerCertificateTest() throws JsonParseException, JsonMappingException, JsonProcessingException, IOException {
-		FtpChipCertificateRequestDto request = createUploadrequest(true);
-		FTPChipDetail ftpChipDetail = new FTPChipDetail();
-		ftpChipDetail.setFtpChipDetailId("12345");
-		ftpChipDetail.setFtpProviderId("12345");
-		Map<String, Object> apiresponse = new HashMap<>();
-		
-		Optional<FTPChipDetail> opt_ftp = Optional.of(ftpChipDetail);
-		Mockito.when(ftpChipDetailRepository.findById(Mockito.anyString())).thenReturn(opt_ftp);
-		Mockito.when(partnerServiceRepository.findByIdAndIsDeletedFalseorIsDeletedIsNullAndIsActiveTrue(Mockito.anyString())).thenReturn(partner);
-		Mockito.when(restUtil.postApi(environment.getProperty("pmp.partner.certificaticate.upload.rest.uri"), null, "", "",
-				MediaType.APPLICATION_JSON, request, Map.class)).thenReturn(apiresponse);
-		
-		ftpChipDetailService.uploadPartnerCertificate(request);
-	}
-	
 	
 	@Test
 	public void getFTPChipDetailsTest() {

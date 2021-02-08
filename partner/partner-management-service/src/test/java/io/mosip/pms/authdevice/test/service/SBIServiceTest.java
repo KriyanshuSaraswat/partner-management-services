@@ -198,16 +198,6 @@ public class SBIServiceTest {
 		
 		}
 	
-//	@Test
-//	public void sbiFilterTest() throws Exception {
-//		secureBiometricInterfaceService.secureBiometricFilterValues(sbiFilterDto);
-//	}
-//	
-//	@Test
-//	public void sbiFilterTest1() throws Exception {
-//		secureBiometricInterfaceService.secureBiometricFilterValues(sbiFilterDto1);
-//	}
-	
 	@Test
 	public void sbiSearchTest() throws Exception{
 		objectMapper.writeValueAsString(deviceRequestDto);

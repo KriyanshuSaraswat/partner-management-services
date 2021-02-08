@@ -65,9 +65,6 @@ public class DeviceDetailControllerTest {
     
     @MockBean
 	AuditUtil auditUtil;
-	
-//    @Mock
-//	FilterColumnValidator filterColumnValidator;
     
     @MockBean	
     private DeviceDetailServiceImpl deviceDetaillService;
@@ -78,8 +75,6 @@ public class DeviceDetailControllerTest {
     
     @Before
     public void setup() {
-//    	ReflectionTestUtils.setField(deviceDetaillService, "filterColumnValidator", filterColumnValidator);
-//    	ReflectionTestUtils.setField(regDeviceDetaillService, "filterColumnValidator", filterColumnValidator);
     	Mockito.doNothing().when(auditUtil).auditRequest(any(), any(), any());
     	Mockito.doNothing().when(auditUtil).auditRequest(any(), any(), any(),any());
     	
@@ -398,7 +393,7 @@ public class DeviceDetailControllerTest {
        }   
 
     @Test    
-    @WithMockUser(roles = {"PARTNER"})
+    @WithMockUser(roles = {"PARTNER_ADMIN"})
     public void createDeviceDetailTest_regdevice() throws Exception {
     	RequestWrapper<DeviceDetailDto> createrequest=createRequest(true);
         mockMvc.perform(post("/devicedetail").contentType(MediaType.APPLICATION_JSON_VALUE)

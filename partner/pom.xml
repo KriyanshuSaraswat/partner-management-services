@@ -143,6 +143,11 @@
 			<artifactId>kernel-logger-logback</artifactId>
 			<version>1.2.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>io.mosip.kernel</groupId>
+			<artifactId>kernel-core</artifactId>
+			<version>${kernel.version}</version>
+		</dependency>
 	</dependencies>
 	
 	<build>	

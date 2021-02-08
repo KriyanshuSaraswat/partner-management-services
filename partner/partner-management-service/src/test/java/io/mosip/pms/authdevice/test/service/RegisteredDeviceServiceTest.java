@@ -233,13 +233,6 @@ public class RegisteredDeviceServiceTest {
 	}
 		
 	@Test
-	public void signRegidterDeviceTest() throws Exception {
-		RegisteredDevicePostDto registeredDevicePostDto = new RegisteredDevicePostDto();
-		registeredDevicePostDto.setDeviceData("abcd");
-		registeredDeviceService.signedRegisteredDevice(registeredDevicePostDto);
-		
-	}
-	@Test
 	public void registeredDeviceSearchtest() throws Exception{
 		objectMapper.writeValueAsString(deviceRequestDto);
 		DeviceDetail device = new DeviceDetail();
@@ -248,12 +241,6 @@ public class RegisteredDeviceServiceTest {
 		registeredDeviceService.searchRegisteredDevice(RegisteredDevice.class, deviceSearchDto);
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void signedregisterdevice() throws Exception{
-		Mockito.when(objectMapper.readValue(any(byte[].class), any(Class.class))).thenReturn(createDevRequest()).thenReturn(getDeviceData(getDeviceInfo(getDitalId())));
-		registeredDeviceService.signedRegisteredDevice(createDevRequest());
-	}
 	@SuppressWarnings("unchecked")
 	@Test(expected=DeviceValidationException.class)
 	public void createRegisteredDevicenegativetimevariant() throws Exception {
@@ -587,34 +574,6 @@ public class RegisteredDeviceServiceTest {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Test//(expected=DeviceValidationException.class)
-	public void deRegisteredDeviceinvalidinputCode() throws Exception {
-		DeRegisterDeviceReqDto deRegisterDeviceReqDto=new DeRegisterDeviceReqDto();
-		deRegisterDeviceReqDto.setDeviceCode("70959dd5-e45f-438a-9ff8-9b263908e572"
-				+ "ghgchghggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
-				+ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-		deRegisterDeviceReqDto.setEnv("mz");
-		DeRegisterDevicePostDto deRegisterDevicePostDto=new DeRegisterDevicePostDto();
-		deRegisterDevicePostDto.setIsItForRegistrationDevice(false);
-		deRegisterDevicePostDto.setDevice(CryptoUtil.encodeBase64String(mapper.writeValueAsBytes(deRegisterDeviceReqDto)));
-//		HeaderRequest header = new HeaderRequest();
-//		header.setAlg("RS256");
-//		header.setType("JWS");
-//		String headerString = mapper.writeValueAsString(header);
-		DeviceDeRegisterResponse deviceDeRegisterResponse = new DeviceDeRegisterResponse();
-		deviceDeRegisterResponse.setStatus("success");
-		deviceDeRegisterResponse.setDeviceCode("70959dd5-e45f-438a-9ff8-9b263908e572");
-		deviceDeRegisterResponse.setEnv("mz");
-		deviceDeRegisterResponse.setTimeStamp(LocalDateTime.now(ZoneOffset.UTC));
-		Mockito.when(objectMapper.writeValueAsBytes(any())).thenReturn(mapper.writeValueAsBytes(deviceDeRegisterResponse));
-		Mockito.when(objectMapper.readValue(Mockito.anyString(), any(Class.class))).thenReturn(dig).thenReturn(responseWrapper).thenReturn(signResponseDto);
-		Mockito.when(objectMapper.readValue(any(byte[].class), any(Class.class))).thenReturn(deRegisterDeviceReqDto);
-		//Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn(headerString).thenReturn(mapper.writeValueAsString(signResponseDto)).thenReturn(mapper.writeValueAsString(deviceDeRegisterResponse));
-		registeredDeviceService.deRegisterDevice(deRegisterDevicePostDto);
-		
-	}
-	
-	@SuppressWarnings("unchecked")
 	@Test(expected=DeviceValidationException.class)
 	public void deRegisteredDeviceRetired() throws Exception {
 		registeredDevice = new RegisteredDevice();
@@ -643,63 +602,6 @@ public class RegisteredDeviceServiceTest {
 		//Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn(headerString).thenReturn(mapper.writeValueAsString(signResponseDto)).thenReturn(mapper.writeValueAsString(deviceDeRegisterResponse));
 		registeredDeviceService.deRegisterDevice(deRegisterDevicePostDto);
 		
-	}
-	
-	
-	
-	@SuppressWarnings("unchecked")
-	@Test//(expected=DeviceValidationException.class)
-	public void deRegisteredDeviceIOException() throws Exception {
-		DeRegisterDeviceReqDto deRegisterDeviceReqDto=new DeRegisterDeviceReqDto();
-		deRegisterDeviceReqDto.setDeviceCode("70959dd5-e45f-438a-9ff8-9b263908e572");
-		deRegisterDeviceReqDto.setEnv("mz");
-		DeRegisterDevicePostDto deRegisterDevicePostDto=new DeRegisterDevicePostDto();
-		deRegisterDevicePostDto.setIsItForRegistrationDevice(false);
-		deRegisterDevicePostDto.setDevice(CryptoUtil.encodeBase64String(mapper.writeValueAsBytes(deRegisterDeviceReqDto)));
-//		HeaderRequest header = new HeaderRequest();
-//		header.setAlg("RS256");
-//		header.setType("JWS");
-//		String headerString = mapper.writeValueAsString(header);
-		DeviceDeRegisterResponse deviceDeRegisterResponse = new DeviceDeRegisterResponse();
-		deviceDeRegisterResponse.setStatus("success");
-		deviceDeRegisterResponse.setDeviceCode("70959dd5-e45f-438a-9ff8-9b263908e572");
-		deviceDeRegisterResponse.setEnv("mz");
-		deviceDeRegisterResponse.setTimeStamp(LocalDateTime.now(ZoneOffset.UTC));
-		Mockito.when(objectMapper.writeValueAsBytes(any())).thenReturn(mapper.writeValueAsBytes(deviceDeRegisterResponse));
-		Mockito.when(objectMapper.readValue(Mockito.anyString(), any(Class.class))).thenReturn(dig).thenReturn(responseWrapper).thenReturn(signResponseDto);
-		Mockito.when(objectMapper.readValue(any(byte[].class), any(Class.class))).thenReturn(deRegisterDeviceReqDto);
-		//Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn(headerString).thenReturn(mapper.writeValueAsString(signResponseDto)).thenThrow(JsonProcessingException.class);
-		registeredDeviceService.deRegisterDevice(deRegisterDevicePostDto);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void deRegisteredDevice() throws Exception {
-		DeRegisterDeviceReqDto deRegisterDeviceReqDto=new DeRegisterDeviceReqDto();
-		deRegisterDeviceReqDto.setDeviceCode("b0a22075-6a8f-4555-9428-390e93089f4c");
-		deRegisterDeviceReqDto.setEnv("mz");
-		DeRegisterDevicePostDto deRegisterDevicePostDto=new DeRegisterDevicePostDto();
-		deRegisterDevicePostDto.setIsItForRegistrationDevice(false);
-		deRegisterDevicePostDto.setDevice(CryptoUtil.encodeBase64String(mapper.writeValueAsBytes(deRegisterDeviceReqDto)));
-//		HeaderRequest header = new HeaderRequest();
-//		header.setAlg("RS256");
-//		header.setType("JWS");
-//		String headerString = mapper.writeValueAsString(header);
-		DeviceDeRegisterResponse deviceDeRegisterResponse = new DeviceDeRegisterResponse();
-		deviceDeRegisterResponse.setStatus("success");
-		deviceDeRegisterResponse.setDeviceCode("b0a22075-6a8f-4555-9428-390e93089f4c");
-		deviceDeRegisterResponse.setEnv("mz");
-		deviceDeRegisterResponse.setTimeStamp(LocalDateTime.now(ZoneOffset.UTC));
-		Mockito.when(objectMapper.writeValueAsBytes(any())).thenReturn(mapper.writeValueAsBytes(deviceDeRegisterResponse));
-		Mockito.when(objectMapper.readValue(Mockito.anyString(), any(Class.class))).thenReturn(dig).thenReturn(responseWrapper).thenReturn(signResponseDto);
-		Mockito.when(objectMapper.readValue(any(byte[].class), any(Class.class))).thenReturn(deRegisterDeviceReqDto);
-	//	Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn(headerString).thenReturn(mapper.writeValueAsString(signResponseDto)).thenReturn(mapper.writeValueAsString(deviceDeRegisterResponse));
-		String signedRegisteredDevice=registeredDeviceService.deRegisterDevice(deRegisterDevicePostDto);
-		String[] split = signedRegisteredDevice.split("\\.");
-		String srd= split[1];
-		
-		DeviceDeRegisterResponse dev=mapper.readValue(CryptoUtil.decodeBase64(srd), DeviceDeRegisterResponse.class);
-		assertTrue(dev.getDeviceCode().equals(deviceDeRegisterResponse.getDeviceCode()));
 	}
 	
 	private RegisteredDevicePostDto createDevRequest() throws JsonProcessingException {

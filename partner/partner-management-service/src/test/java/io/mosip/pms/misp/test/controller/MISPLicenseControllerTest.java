@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -57,16 +56,6 @@ public class MISPLicenseControllerTest {
 	
 	@Autowired
 	private ObjectMapper objectMapper;	
-	
-	@Before
-	public void setUp() {
-//		ReflectionTestUtils.setField(infraProvidertService, "partnerRepository", partnerRepository);
-//		ReflectionTestUtils.setField(infraProvidertService, "mispLicenseRepository", mispLicenseRepository);
-		//ReflectionTestUtils.setField(infraProvidertService, "webSubPublisher", webSubPublisher);
-//		Mockito.doNothing().when(auditUtil).auditRequest(any(), any(), any());
-//    	Mockito.doNothing().when(auditUtil).auditRequest(any(), any(), any(),any());
-//    	Mockito.doNothing().when(auditUtil).callAuditManager(any());
-	}
 	
 	@Test
 	@WithMockUser(roles = {"PARTNERMANAGER"})

@@ -68,6 +68,7 @@ import io.mosip.pms.partner.manager.exception.PartnerManagerServiceException;
 import io.mosip.pms.partner.manager.service.PartnerManagerService;
 import io.mosip.pms.partner.response.dto.PartnerCertDownloadResponeDto;
 
+
 @Service
 @Transactional
 public class PartnerManagementServiceImpl implements PartnerManagerService {
